@@ -1,10 +1,11 @@
 import express from "express"
 import dotenv from "dotenv"
 import mongoose from "mongoose"
-import authRoute from "./routes/auth.js"
-import usersRoute from "./routes/users.js"
-import hotelsRoute from "./routes/hotels.js"
-import roomsRoute from "./routes/rooms.js"
+import authRoute from "./routes/auth-routes.js"
+import usersRoute from "./routes/users-routes.js"
+import hotelsRoute from "./routes/hotels-routes.js"
+import roomsRoute from "./routes/rooms-routes.js"
+import cookieParser from "cookie-parser"
 
 // const express = require("express") --- standard nodejs method to export...
 // using es6 method
@@ -34,7 +35,7 @@ mongoose.connection.on("disconnected", ()=>{
 // })
 
 // middlewares.............................................
-
+app.use(cookieParser())
 app.use(express.json())
 
 // if theres a req to "/auth", use the authRo ute
