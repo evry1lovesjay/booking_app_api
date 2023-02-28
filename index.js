@@ -38,7 +38,7 @@ mongoose.connection.on("disconnected", ()=>{
 app.use(cookieParser())
 app.use(express.json())
 
-// if theres a req to "/auth", use the authRo ute
+// if theres a req to "/auth", use the authRoute
 app.use("/api/auth", authRoute)
 app.use("/api/users", usersRoute)
 app.use("/api/hotels", hotelsRoute)
