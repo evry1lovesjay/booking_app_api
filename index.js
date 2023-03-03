@@ -6,6 +6,7 @@ import usersRoute from "./routes/users-routes.js"
 import hotelsRoute from "./routes/hotels-routes.js"
 import roomsRoute from "./routes/rooms-routes.js"
 import cookieParser from "cookie-parser"
+import cors from "cors"
 
 // const express = require("express") --- standard nodejs method to export...
 // using es6 method
@@ -35,6 +36,7 @@ mongoose.connection.on("disconnected", ()=>{
 // })
 
 // middlewares.............................................
+app.use(cors())
 app.use(cookieParser())
 app.use(express.json())
 
