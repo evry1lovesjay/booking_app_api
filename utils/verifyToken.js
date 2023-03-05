@@ -30,7 +30,7 @@ export const verifyAdmin = (req, res, next) =>{
         if(req.user.IsAdmin){
             next()
         } else {
-            return next(createError(403, "You are not authorized!"))
+            return next(createError(403, "You are not an Admin!"))
         }   
     })
 }
