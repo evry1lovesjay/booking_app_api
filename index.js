@@ -11,7 +11,6 @@ import cors from "cors"
 // const express = require("express") --- standard nodejs method to export...
 // using es6 method
 const app = express()
-
 dotenv.config()
 
 // connecting to mongoDB via mongoose.........................
@@ -20,7 +19,7 @@ const connect = async ()=>{
         await mongoose.connect(process.env.MONGO_CONNECTION);
         console.log("connected to mongoDB")
     } catch (error){
-        throw error
+        console.log(error)
     }
 }
 
@@ -36,7 +35,8 @@ mongoose.connection.on("disconnected", ()=>{
 // })
 
 // middlewares.............................................
-app.use(cors())
+app.use(cors({origin:"https://bookingappclone.netlify.app/", credentials:true}))
+// app.use(cors({origin:"http://localhost:3000", credentials:true}))
 app.use(cookieParser())
 app.use(express.json())
 
@@ -58,8 +58,9 @@ app.use((err,req,res,next)=>{
     })
 })
 
+const PORT = process.env.PORT || 6500
     
-app.listen(6500, () => {
+app.listen(PORT, () => {
     connect()
-    console.log("Connected to backend...")
+    console.log(`Connected to backend...${PORT}`)
 })

@@ -31,7 +31,7 @@ export const login = async (req,res, next)=>{
       if(!isPasswordCorrect) return next(createError(404, "Wrong Password or username!"))
       
       // code for jsonwebtoken below.................
-      const token = jwt.sign({id:user._id, isAdmin:user.isAdmin}, process.env.JWT)
+      const token = jwt.sign({id:user._id, isAdmin:user.isAdmin}, process.env.JWT,{expiresIn:"1d"})
 
       //the code below removes the password and admin status from frontend view
       const {password, isAdmin, ...otherDetails} = user._doc
@@ -41,4 +41,9 @@ export const login = async (req,res, next)=>{
     }catch(err){
       next(err)
   }
+}
+
+export const logout = async  (req, res) => {
+  res.clearCookie("accessToken", {sameSite: "none", secure: true})
+  .status(200).send("User has been logged out!")
 }
