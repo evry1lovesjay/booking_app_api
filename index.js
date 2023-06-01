@@ -35,8 +35,19 @@ mongoose.connection.on("disconnected", ()=>{
 // })
 
 // middlewares.............................................
-app.use(cors({origin:"https://bookingappclone.netlify.app/", credentials:true}))
-// app.use(cors({origin:"http://localhost:3000", credentials:true}))
+
+const API_URL = process.env.NODE_ENV === 'production'
+  ? process.env.REACT_APP_CLIENT_URL_PROD
+  : process.env.REACT_APP_CLIENT_URL_DEV;
+
+
+// app.use(cors({origin:"https://bookingappclone.netlify.app/", credentials:true}))
+// app.use(cors({origin:"http://localhost:6500", credentials:true}))
+
+app.use(cors({origin:`${API_URL}`, credentials:true}))
+
+
+
 app.use(cookieParser())
 app.use(express.json())
 
